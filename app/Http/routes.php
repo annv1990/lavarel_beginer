@@ -1,5 +1,7 @@
 <?php
 
+use App\Post;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,10 +13,26 @@
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/insertpost', function () {
+    DB::insert('insert into posts(title, content) values (?,?)', ["PHP title", "PHP content"]);
+    DB::insert('insert into posts(title, content) values (?,?)', ["PHP title 1 ", "PHP content 2"]);
+});
+
+Route::get('/readpost', function () {
+    $results = DB::select('select * from posts');
+    return var_dump($results);
+});
+
+Route::get('/updatepost', function () {
+    DB::update('update posts set title = "update title PHP" where id=?', [1]);
+});
+
+
+/*
 Route::get('/about', function () {
     return "Hi about";
 });
@@ -41,3 +59,17 @@ Route::get('/admin/posts', array('as' => 'admin.home',function () {
 Route::get('/contact', 'PostsController@contact');
 
 Route::get('post/{id}/{name}/{password}', 'PostsController@show_post');
+
+/*
+ * ELOQUENT
+ */
+Route::get('/find', function () {
+    $posts = Post::all();
+    $postABC = \App\PostABC::find(1);
+    $allTitle = "";
+    foreach ($posts as $post) {
+        $allTitle .= $post->title;
+    }
+    $allTitle .= $postABC->content;
+    return $allTitle;
+});

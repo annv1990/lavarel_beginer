@@ -87,7 +87,9 @@ class PostsController extends Controller
 
     public function contact()
     {
-        return view('contact');
+
+        $testArray = array('test' => 'fsdfs', 'fdf' => 'fsfsd');
+        return view('contact', compact('$testArray'));
     }
 
     public function show_post($id, $name, $password)
