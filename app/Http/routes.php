@@ -73,3 +73,28 @@ Route::get('/find', function () {
     $allTitle .= $postABC->content;
     return $allTitle;
 });
+
+Route::get('/insertbyequolent', function (){
+    $post = new Post;
+    $post->title = "title insert by equolent";
+    $post->content = "content insert by equolent";
+    $post->save();
+});
+
+Route::get('/insertbyemass', function (){
+    $post =  Post::create(['title'=>'MASS insert title','content'=>'MASS insert content']);
+});
+
+Route::get('/updatebyequolent', function (){
+    Post::where('title','PHP title 1')->where('is_admin', 0)->update(['title'=>'PHP title update by equolent']);
+});
+
+/*
+ |------------------------------------------------------
+ |----------Eloquent Relationships ---------------------
+ |------------------------------------------------------
+ */
+
+Route::get('/onevsone', function(){
+
+});
