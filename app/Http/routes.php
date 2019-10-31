@@ -1,6 +1,7 @@
 <?php
 
 use App\Post;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,5 +97,17 @@ Route::get('/updatebyequolent', function (){
  */
 
 Route::get('/onevsone', function(){
+    $phone = User::find(1)->phone;
+    return $phone;
+});
 
+Route::get('/onevsmany', function(){
+    $comments = Post::find(1)->comments;
+    return $comments;
+});
+
+Route::get('/onevsmanyinverser', function(){
+    $comment = App\Comment::find(1);
+    $post =  $comment->post;
+    return $post;
 });
