@@ -2,7 +2,9 @@
 
 use App\Post;
 use App\User;
-
+use App\Role;
+use App\Comment;
+use App\Phone;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -101,13 +103,31 @@ Route::get('/onevsone', function(){
     return $phone;
 });
 
+Route::get('/onevsoneinverser', function(){
+    $phone = Phone::find(1);
+    $user =  $phone->user;
+    return $user;
+});
+
 Route::get('/onevsmany', function(){
     $comments = Post::find(1)->comments;
     return $comments;
 });
 
 Route::get('/onevsmanyinverser', function(){
-    $comment = App\Comment::find(1);
+    $comment = Comment::find(1);
     $post =  $comment->post;
     return $post;
 });
+
+Route::get('/manyvsmany', function(){
+    $user= Role::find(1)->users;
+    return $user;
+});
+
+Route::get('/manyvsmany1', function(){
+    $post= User::find(1)->roles;
+    return $post;
+});
+
+
