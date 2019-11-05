@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Post;
 use App\Http\Requests;
 
 class PostsController extends Controller
@@ -13,10 +13,11 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         //
-        return "working with " . $id;
+        $posts = Post::all();
+        return  view('posts.index', compact('posts'));
     }
 
     /**
@@ -26,7 +27,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -37,7 +38,10 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post;
+        $post->title = $request->title;
+        $post->save();
+        return redirect('/posts');
     }
 
     /**
@@ -48,7 +52,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findorFail($id);
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -59,7 +64,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findorFail($id);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -71,7 +77,9 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $post = Post::findOrFail($id);
+       $post->update($request->all());
+       return redirect('/posts');
     }
 
     /**

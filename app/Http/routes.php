@@ -64,6 +64,8 @@ Route::get('/contact', 'PostsController@contact');
 Route::get('post/{id}/{name}/{password}', 'PostsController@show_post');
 
 /*
+ *
+ *
  * ELOQUENT
  */
 Route::get('/find', function () {
@@ -129,5 +131,7 @@ Route::get('/manyvsmany1', function(){
     $post= User::find(1)->roles;
     return $post;
 });
+
+Route::resource('/posts','PostsController');
 
 
