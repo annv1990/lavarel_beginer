@@ -132,6 +132,10 @@ Route::get('/manyvsmany1', function(){
     return $post;
 });
 
+///////////////////////////
+/*Route::group(['middleware' => 'web'], function (){
+
+});*/
 Route::resource('/posts','PostsController');
 
 

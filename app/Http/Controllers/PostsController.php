@@ -17,7 +17,7 @@ class PostsController extends Controller
     {
         //
         $posts = Post::all();
-        return  view('posts.index', compact('posts'));
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -38,6 +38,9 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required',
+        ]);
         $post = new Post;
         $post->title = $request->title;
         $post->save();
@@ -77,9 +80,9 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $post = Post::findOrFail($id);
-       $post->update($request->all());
-       return redirect('/posts');
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+        return redirect('/posts');
     }
 
     /**
