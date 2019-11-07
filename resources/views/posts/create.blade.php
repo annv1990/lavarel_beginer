@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.learn')
 
 @section('title', 'Create Post page')
 

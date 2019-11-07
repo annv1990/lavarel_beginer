@@ -139,3 +139,7 @@ Route::get('/manyvsmany1', function(){
 Route::resource('/posts','PostsController');
 
 
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
